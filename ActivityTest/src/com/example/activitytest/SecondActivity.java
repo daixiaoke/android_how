@@ -45,19 +45,29 @@ public class SecondActivity extends Activity {
 				/*Toast.makeText(SecondActivity.this, "Bye Bye!",
 						Toast.LENGTH_SHORT).show();
 				finish();*/
+				
 				// 调用系统浏览器打开网页
-				Intent intent = new Intent(Intent.ACTION_VIEW);
+				/*Intent intent = new Intent(Intent.ACTION_VIEW);
 				intent.setData(Uri.parse("http://www.baidu.com"));
+				startActivity(intent);*/
+				
 				// 调用系统拨号界面
 				/*Intent intent = new Intent(Intent.ACTION_DIAL);
-				intent.setData(Uri.parse("tel:10010"));*/
-				startActivity(intent);
+				intent.setData(Uri.parse("tel:10010"));
+				startActivity(intent);*/
+				
 				// 提取活动1发来的数据
 				/*Intent intent2 = getIntent();
 				String data = intent2.getStringExtra("extra_data");
 				//Log.d("SecondaryActivity", data);
 				Toast.makeText(SecondActivity.this, data,
 						Toast.LENGTH_SHORT).show();*/
+				
+				// 向上一个活动返回数据
+				Intent intent = new Intent();
+				intent.putExtra("data_return", "data return to activity 1 from activity 2");
+				setResult(RESULT_OK, intent);
+				finish();
 				
 			}
 		});
@@ -80,6 +90,14 @@ public class SecondActivity extends Activity {
 		}
 		return true;
 	}
-	
+
+	// 通过点击back键返回上一活动时也返回数据
+	@Override
+	public void onBackPressed() {
+		Intent intent = new Intent();
+		intent.putExtra("data_return", "onBackPressed data return from activity 2");
+		setResult(RESULT_OK, intent);
+		finish();
+	}
 
 }

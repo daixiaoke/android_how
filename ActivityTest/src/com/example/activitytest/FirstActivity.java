@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +43,10 @@ public class FirstActivity extends Activity {
 				// 	传递数据给活动2
 				String data = "下次再大力点哦";
 				intent.putExtra("extra_data", data);
-				startActivity(intent);
+				//startActivity(intent);
+				
+				// 期待返回值的启动活动
+				startActivityForResult(intent, 1);
 			}
 		});
 		/*Button button2 = (Button) findViewById(R.id.button_2);
@@ -72,6 +76,18 @@ public class FirstActivity extends Activity {
 		default:
 		}
 		return true;
+	}
+	
+	protected  void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch(requestCode) {
+		case 1:
+			if (resultCode == RESULT_OK) {
+				String returnData = data.getStringExtra("data_return");
+				Log.d("FirstActivity", returnData);
+			}
+			break;
+			default:
+		}
 	}
 	
 }
