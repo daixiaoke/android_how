@@ -6,3 +6,6 @@
 *.apk
 *.dex
 resources.ap_
+
+# ignore directories
+.metadata

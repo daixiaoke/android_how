@@ -2,6 +2,7 @@ package com.example.activitytest;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,12 +30,18 @@ public class FirstActivity extends Activity {
 					//	Toast.LENGTH_SHORT).show();
 				
 				// 显示intent
-				//Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
+				Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
 				//startActivity(intent);
 				
 				//隐式intent
-				Intent intent = new Intent("com.example.activitytest.ACTION_START");
-				intent.addCategory("com.example.activitytest.MY_CATEGORY");
+				/*Intent intent = new Intent("com.example.activitytest.ACTION_START");
+				intent.addCategory("com.example.activitytest.MY_CATEGORY");*/
+				/*Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.setData(Uri.parse("http://www.baidu.com"));*/
+				
+				// 	传递数据给活动2
+				String data = "下次再大力点哦";
+				intent.putExtra("extra_data", data);
 				startActivity(intent);
 			}
 		});

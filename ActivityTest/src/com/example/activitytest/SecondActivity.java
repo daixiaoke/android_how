@@ -1,7 +1,10 @@
 package com.example.activitytest;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,13 +31,34 @@ public class SecondActivity extends Activity {
 						Toast.LENGTH_SHORT).show();
 			}
 		});*/
+		
+		// 提取活动1发来的数据
+		Intent intent2 = getIntent();
+		String data = intent2.getStringExtra("extra_data");
+		Log.d("SecondaryActivity", data);
+		//Toast.makeText(SecondActivity.this, data, Toast.LENGTH_SHORT).show();
+		
 		Button button2 = (Button) findViewById(R.id.button_2);
 		button2.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(SecondActivity.this, "Bye Bye!",
+				/*Toast.makeText(SecondActivity.this, "Bye Bye!",
 						Toast.LENGTH_SHORT).show();
-				finish();
+				finish();*/
+				// 调用系统浏览器打开网页
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.setData(Uri.parse("http://www.baidu.com"));
+				// 调用系统拨号界面
+				/*Intent intent = new Intent(Intent.ACTION_DIAL);
+				intent.setData(Uri.parse("tel:10010"));*/
+				startActivity(intent);
+				// 提取活动1发来的数据
+				/*Intent intent2 = getIntent();
+				String data = intent2.getStringExtra("extra_data");
+				//Log.d("SecondaryActivity", data);
+				Toast.makeText(SecondActivity.this, data,
+						Toast.LENGTH_SHORT).show();*/
+				
 			}
 		});
 	}
