@@ -39,7 +39,7 @@ public class SecondActivity extends Activity {
 		});
 	}
 	
-	public boolean onCreateOptionsMenu(Menu menu) {
+	/*public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
@@ -47,15 +47,15 @@ public class SecondActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.add_item:
-			Toast.makeText(this, "用馒头砸", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "用鞭子抽", Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.remove_item:
-			Toast.makeText(this, "用冰水浇", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "用棍子抽", Toast.LENGTH_SHORT).show();
 			break;
 		default:
 		}
 		return true;
-	}
+	}*/
 	
 
 }

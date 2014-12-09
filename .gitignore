@@ -1,0 +1,8 @@
+#  files to be ignored by github
+
+# .class files created by Java compiler
+*.class
+*.jar
+*.apk
+*.dex
+resources.ap_
