@@ -13,12 +13,14 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class FirstActivity extends Activity {
+public class FirstActivity extends BaseActivity {
 	
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		//requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
+		Log.d("FirstActivity", "Task id is " + getTaskId());
+		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.first_layout);
 		//requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -30,8 +32,14 @@ public class FirstActivity extends Activity {
 				//Toast.makeText(FirstActivity.this, "你真欠抽",
 					//	Toast.LENGTH_SHORT).show();
 				
+				// 调用SecondActivity实现的actionStart启动之
+				SecondActivity.actionStart(FirstActivity.this, "data1", "data2");
+				
 				// 显示intent
-				Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
+				//Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
+				
+				// 测试活动启动方式standard
+				//Intent intent = new Intent(FirstActivity.this, FirstActivity.class);
 				//startActivity(intent);
 				
 				//隐式intent
@@ -41,12 +49,12 @@ public class FirstActivity extends Activity {
 				intent.setData(Uri.parse("http://www.baidu.com"));*/
 				
 				// 	传递数据给活动2
-				String data = "下次再大力点哦";
+				/*String data = "下次再大力点哦";
 				intent.putExtra("extra_data", data);
 				//startActivity(intent);
 				
 				// 期待返回值的启动活动
-				startActivityForResult(intent, 1);
+				startActivityForResult(intent, 1);*/
 			}
 		});
 		/*Button button2 = (Button) findViewById(R.id.button_2);
@@ -60,12 +68,12 @@ public class FirstActivity extends Activity {
 		});*/
 	}
 	
-	public boolean onCreateOptionsMenu(Menu menu) {
+	/*public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
-	}
+	}*/
 	
-	public boolean onOptionsItemSelected(MenuItem item) {
+	/*public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.add_item:
 			Toast.makeText(this, "用鞭子抽", Toast.LENGTH_SHORT).show();
@@ -76,9 +84,9 @@ public class FirstActivity extends Activity {
 		default:
 		}
 		return true;
-	}
+	}*/
 	
-	protected  void onActivityResult(int requestCode, int resultCode, Intent data) {
+	/*protected  void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch(requestCode) {
 		case 1:
 			if (resultCode == RESULT_OK) {
@@ -88,6 +96,11 @@ public class FirstActivity extends Activity {
 			break;
 			default:
 		}
-	}
+	}*/
 	
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		Log.d("FirstActivity", "onRestart");
+	}
 }

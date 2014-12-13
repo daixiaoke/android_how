@@ -1,6 +1,7 @@
 package com.example.activitytest;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,13 +14,15 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class SecondActivity extends Activity {
+public class SecondActivity extends BaseActivity {
 
 	
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		//requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
+		//Log.d("SecondActivity", this.toString());
+		Log.d("SecondActivity", "Task id is " + getTaskId());
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.second_layout);
 		//requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -33,9 +36,9 @@ public class SecondActivity extends Activity {
 		});*/
 		
 		// 提取活动1发来的数据
-		Intent intent2 = getIntent();
+		/*Intent intent2 = getIntent();
 		String data = intent2.getStringExtra("extra_data");
-		Log.d("SecondaryActivity", data);
+		Log.d("SecondaryActivity", data);*/
 		//Toast.makeText(SecondActivity.this, data, Toast.LENGTH_SHORT).show();
 		
 		Button button2 = (Button) findViewById(R.id.button_2);
@@ -45,6 +48,10 @@ public class SecondActivity extends Activity {
 				/*Toast.makeText(SecondActivity.this, "Bye Bye!",
 						Toast.LENGTH_SHORT).show();
 				finish();*/
+				
+				Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
+				startActivity(intent);
+				
 				
 				// 调用系统浏览器打开网页
 				/*Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -57,23 +64,32 @@ public class SecondActivity extends Activity {
 				startActivity(intent);*/
 				
 				// 提取活动1发来的数据
-				/*Intent intent2 = getIntent();
-				String data = intent2.getStringExtra("extra_data");
-				//Log.d("SecondaryActivity", data);
-				Toast.makeText(SecondActivity.this, data,
-						Toast.LENGTH_SHORT).show();*/
+				Intent intent2 = getIntent();
+				String data1 = intent2.getStringExtra("param1");
+				Log.d("SecondActivity", data1);
+				String data2 = intent2.getStringExtra("param2");
+				Log.d("SecondActivity", data2);
+				//Toast.makeText(SecondActivity.this, data1, Toast.LENGTH_SHORT).show();
 				
 				// 向上一个活动返回数据
-				Intent intent = new Intent();
+				/*Intent intent = new Intent();
 				intent.putExtra("data_return", "data return to activity 1 from activity 2");
 				setResult(RESULT_OK, intent);
-				finish();
+				finish();*/
 				
 			}
 		});
 	}
 	
-	public boolean onCreateOptionsMenu(Menu menu) {
+	// 清晰的表达SecondActivity启动所需的参数
+	public static void actionStart(Context context, String data1, String data2) {
+		Intent intent = new Intent(context, SecondActivity.class);
+		intent.putExtra("param1", data1);
+		intent.putExtra("param2", data2);
+		context.startActivity(intent);
+	}
+	
+	/*public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
@@ -98,6 +114,13 @@ public class SecondActivity extends Activity {
 		intent.putExtra("data_return", "onBackPressed data return from activity 2");
 		setResult(RESULT_OK, intent);
 		finish();
-	}
+	}*/
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		Log.d("SecondActivity", "onDestory");
+	}
+	
+	
 }
