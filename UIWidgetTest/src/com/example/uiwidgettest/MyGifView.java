@@ -14,7 +14,7 @@ public class MyGifView extends View{
 	public MyGifView(Context context, AttributeSet attributeSet) {
 		super(context,attributeSet);
 		//以文件流（InputStream）读取进gif图片资源
-		movie = Movie.decodeStream(getResources().openRawResource(R.drawable.ooo));
+		movie = Movie.decodeStream(getResources().openRawResource(R.drawable.android));
 	}
 
 	@Override

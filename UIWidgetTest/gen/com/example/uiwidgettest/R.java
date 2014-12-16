@@ -22,20 +22,15 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int aaa=0x7f020000;
-        public static final int android=0x7f020001;
-        public static final int db=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int lol=0x7f020004;
-        public static final int ooo=0x7f020005;
-        public static final int panda=0x7f020006;
-        public static final int woyun=0x7f020007;
+        public static final int android=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f080004;
+        public static final int action_settings=0x7f080005;
         public static final int button=0x7f080001;
         public static final int edit_text=0x7f080002;
-        public static final int image_view=0x7f080003;
+        public static final int image_view=0x7f080004;
+        public static final int progress_bar=0x7f080003;
         public static final int text_view=0x7f080000;
     }
     public static final class layout {
