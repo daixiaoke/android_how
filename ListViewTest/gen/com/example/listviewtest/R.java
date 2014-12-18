@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.example.uilayouttest;
+package com.example.listviewtest;
 
 public final class R {
     public static final class attr {
@@ -25,10 +25,8 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int account=0x7f080000;
-        public static final int action_settings=0x7f080003;
-        public static final int login=0x7f080002;
-        public static final int password=0x7f080001;
+        public static final int action_settings=0x7f080001;
+        public static final int list_view=0x7f080000;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

@@ -36,7 +36,7 @@
 
 </LinearLayout-->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
@@ -83,4 +83,66 @@
         android:layout_below="@id/button3"
         android:layout_alignLeft="@id/button2"
         android:text="Btn 5" />   
-</RelativeLayout>
+</RelativeLayout-->
+
+<!-- FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Btn 5" />
+    
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher"
+        />
+        
+
+</FrameLayout-->
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:stretchColumns="1">
+
+    <TableRow>
+        <TextView
+            android:layout_height="wrap_content"
+            android:text="Account" />
+        
+        <EditText
+            android:id="@+id/account" 
+            android:layout_height="wrap_content"
+            android:hint="Input you account" />
+        
+    </TableRow>
+    
+    <TableRow>
+        <TextView
+            android:layout_height="wrap_content"
+            android:text="Password" />
+        
+        <EditText
+            android:id="@+id/password" 
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
+        
+    </TableRow>
+
+    <TableRow>
+        <Button
+        android:id="@+id/login"
+        android:layout_height="wrap_content"
+        android:layout_span="2"
+        android:text="Login" />     
+    </TableRow>
+    
+</TableLayout>    
+
