@@ -8,4 +8,4 @@
 resources.ap_
 
 # ignore directories
-.metadata
+.metadata/
