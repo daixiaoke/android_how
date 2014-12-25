@@ -1,5 +1,6 @@
 package com.example.filepersistencetest;
 
+import android.util.Log;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -23,29 +24,43 @@ public class MainActivity extends Activity {
 
 	private EditText edit;
 	
+	
+	// try to use c/c++ library
+	
+	static {
+		try {
+		System.loadLibrary("fileio");
+		} catch (UnsatisfiedLinkError ule) {
+			Log.e("JNI", "WARNING: Could not load libfileio.so");
+		}
+	}	
+	
+	public native void saveData(String inputText);
+	//public native static String load_data(); 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
 		edit = (EditText) findViewById(R.id.edit_text);
-		// 读取退出时保存的内容
-		String savedData = load();
+		// restore saved data
+		/*String savedData = load();
 		if (!TextUtils.isEmpty(savedData)) {
 			edit.setText(savedData);
 			edit.setSelection(savedData.length());
 			Toast.makeText(MainActivity.this, "Restroing succeeded", Toast.LENGTH_SHORT).show();
-		}
+		}*/
 	}
 
 	
-	public String load() {
+	/*public String load() {
 		String line = "";
 		FileInputStream in = null;
 		BufferedReader reader = null;
 		StringBuilder content = new StringBuilder();
 		try {
-			in = openFileInput("data_save");
+			in = openFileInput("data_save.txt");
 			reader = new BufferedReader(new InputStreamReader(in));
 			while ( (line=reader.readLine()) != null ) {
 				content.append(line);
@@ -62,7 +77,7 @@ public class MainActivity extends Activity {
 			}
 		}
 		return content.toString();
-	}
+	}*/
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -86,9 +101,10 @@ public class MainActivity extends Activity {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		// 保存用户输入的内容
+		// save data for restoring
 		String inputText = edit.getText().toString();
-		save(inputText);
+		//save(inputText);
+		saveData(inputText);
 	}
 	
 	public void save(String saveData) {
