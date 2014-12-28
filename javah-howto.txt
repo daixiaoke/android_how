@@ -1,0 +1,12 @@
+javah使用方法：
+# cd /d "project_root_dir"
+# javah -classpath "android.jar";bin/classes package.full.name.classname
+
+
+
+D:\buffer\hellojni\HelloJNI>javah -classpath 
+"c:\program files\Android\android-sdk\platforms\android-16\android.jar";bin/classes
+test.hellojni.HelloJNIActivity
+--------------------------------------------------------------------------------
+comment by hjj: 成功
+在当前目录:D:\buffer\hellojni\HelloJNI 生成 test_hellojni_HelloJNIActivity.h
