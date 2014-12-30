@@ -62,20 +62,20 @@ public class MainActivity extends Activity implements OnClickListener{
 			values.put("pages", 510);
 			values.put("price", 19.35);
 			db.insert("Book", null, values);
-			Toast.makeText(MainActivity.this, "Add two items succeeded",  Toast.LENGTH_SHORT).show();
+			//Toast.makeText(MainActivity.this, "Add two items succeeded",  Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.update_data:
 			SQLiteDatabase db2 = dbHelper.getWritableDatabase();
 			ContentValues values2 = new ContentValues();
 			values2.put("price", 10.99);
 			db2.update("Book",  values2, "name=?", new String[] {"The Da Vinci Code"});
-			Toast.makeText(MainActivity.this, "Update price succeeded",  Toast.LENGTH_SHORT).show();
+			//Toast.makeText(MainActivity.this, "Update price succeeded",  Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.delete_data:
 			SQLiteDatabase db3 = dbHelper.getWritableDatabase();
 			
 			db3.delete("Book", "pages>?", new String[] {"500"});
-			Toast.makeText(MainActivity.this, "Delete items whose page is larger than 500",  Toast.LENGTH_SHORT).show();
+			//Toast.makeText(MainActivity.this, "Delete items whose page is larger than 500",  Toast.LENGTH_SHORT).show();
 			break;
 		case R.id.query_data:
 			SQLiteDatabase db4 = dbHelper.getWritableDatabase();
