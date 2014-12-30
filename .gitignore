@@ -10,3 +10,5 @@ android_how.*
 
 # ignore directories
 .metadata/
+bin/
+gen/
