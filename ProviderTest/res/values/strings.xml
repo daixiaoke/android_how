@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ProviderTest</string>
+    <string name="hello_world">Hello world!</string>
+	<string name="add_data">Add To Book</string>
+    <string name="update_data">Update Book</string>
+    <string name="delete_data">Delete From Book</string>
+    <string name="query_data">Query From Book</string>
+    
+</resources>
