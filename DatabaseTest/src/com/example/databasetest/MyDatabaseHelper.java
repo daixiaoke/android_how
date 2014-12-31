@@ -3,7 +3,7 @@ package com.example.databasetest;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
+//import android.widget.Toast;
 import android.content.Context;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
