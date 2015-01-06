@@ -6,12 +6,14 @@ import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +29,8 @@ public class MainActivity extends Activity implements OnClickListener{
 	private ImageView picture;
 	private Uri imageUri;
 
+	private Button chooseFromAlbum;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,6 +39,9 @@ public class MainActivity extends Activity implements OnClickListener{
 		takePhoto = (Button) findViewById(R.id.take_photo);
 		picture = (ImageView) findViewById(R.id.picture);
 		takePhoto.setOnClickListener(this);
+		
+		chooseFromAlbum = (Button) findViewById(R.id.choose_from_album);
+		chooseFromAlbum.setOnClickListener(this);
 	}
 
 	public void onClick(View v) {
@@ -50,9 +57,40 @@ public class MainActivity extends Activity implements OnClickListener{
 				e.printStackTrace();
 			}
 			imageUri = Uri.fromFile(outputImage);
+			// TODO: 图像像素大于80万时无法打开图片进行裁剪，待修改
 			Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
 			intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 			startActivityForResult(intent, TAKE_PHOTO);
+			break;
+		case R.id.choose_from_album:
+			File outputImage2 = new File(Environment.getExternalStorageDirectory(), "output_image2.jpg");
+			try {
+				if (outputImage2.exists()) {
+					outputImage2.delete();
+				}
+				outputImage2.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			imageUri = Uri.fromFile(outputImage2);
+			// 错误：无法打开图片进行裁剪
+			//Intent intent2 = new Intent("android.intent.action.GET_CONTENT");
+			//intent2.setType("image/*");
+			//intent2.putExtra("crop", true);
+			//intent2.putExtra("scale", true);
+			Intent intent2 = new Intent(Intent.ACTION_GET_CONTENT, null);
+			intent2.setType("image/*");
+			intent2.putExtra("crop", "true");
+			intent2.putExtra("aspectX", 1);
+			intent2.putExtra("aspectY", 1);
+			intent2.putExtra("outputX", 1000);
+			intent2.putExtra("outputY", 1000);
+			intent2.putExtra("scale", true);
+			intent2.putExtra("return-data", false);
+			intent2.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+			intent2.putExtra("noFaceDetection", true);
+			intent2.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+			startActivityForResult(intent2, CROP_PHOTO);
 			break;
 		default:
 			break;
@@ -72,8 +110,25 @@ public class MainActivity extends Activity implements OnClickListener{
 			break;
 		case CROP_PHOTO:
 			if (resultCode == RESULT_OK) {
+				// 添加图片缩放: 验证ok
+				/*
+				String picturePath = Environment.getExternalStorageDirectory() + "/output_image3.jpg";
+				//String picturePath = getRealPathFromURI(imageUri);
+				System.out.printf("picturePath=%s", picturePath);
+				BitmapFactory.Options options = new BitmapFactory.Options();
+		        // options 设为true时，构造出的bitmap没有图片，只有一些长宽等配置信息，但比较快，设为false时，才有图片
+		        options.inJustDecodeBounds = true;
+		        Bitmap bitmap = BitmapFactory.decodeFile(picturePath, options);
+		        int scale = (int)( options.outWidth / (float)300);
+		        if(scale <= 0)
+		        	scale = 1;
+		        options.inSampleSize = scale;
+		        options.inJustDecodeBounds = false;
+		        bitmap = BitmapFactory.decodeFile(picturePath, options);
+		        */
+		        
 				try {
-					Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
+					Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));					
 					picture.setImageBitmap(bitmap);
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
@@ -84,6 +139,14 @@ public class MainActivity extends Activity implements OnClickListener{
 			break;
 		}
 	}
+	
+	public String getRealPathFromURI(Uri contentUri) {
+	       String[] proj = { MediaStore.Images.Media.DATA };
+	       Cursor cursor = managedQuery(contentUri, proj, null, null, null);
+	       int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+	       cursor.moveToFirst();
+	       return cursor.getString(column_index);
+	   }
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
