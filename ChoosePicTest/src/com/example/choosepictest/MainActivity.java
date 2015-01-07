@@ -59,7 +59,6 @@ public class MainActivity extends Activity implements OnClickListener{
 				e.printStackTrace();
 			}
 			imageUri = Uri.fromFile(outputImage);
-			// TODO: 图像像素大于80万时无法打开图片进行裁剪，待修改
 			Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
 			intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 			startActivityForResult(intent, TAKE_PHOTO);
@@ -75,7 +74,6 @@ public class MainActivity extends Activity implements OnClickListener{
 				e.printStackTrace();
 			}
 			imageUri = Uri.fromFile(outputImage2);
-			// 错误：无法打开图片进行裁剪
 			Intent intent2 = new Intent("android.intent.action.GET_CONTENT");
 			//Intent intent2 = new Intent(Intent.ACTION_GET_CONTENT, null);
 			intent2.setType("image/*");
@@ -93,7 +91,7 @@ public class MainActivity extends Activity implements OnClickListener{
 			intent2.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
 			// 系统的裁剪图片默认对图片进行人脸识别，当识别到有人脸时，会按aspectX和aspectY为1来处理
 			// 如果想设置成自定义的裁剪比例，需要设置noFaceDetection为true。
-			//intent2.putExtra("noFaceDetection", true);
+			intent2.putExtra("noFaceDetection", true);
 			intent2.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 			startActivityForResult(intent2, CROP_PHOTO);
 			break;
@@ -106,13 +104,15 @@ public class MainActivity extends Activity implements OnClickListener{
 		switch(requestCode) {
 		case TAKE_PHOTO:
 			if (resultCode == RESULT_OK) {
+				// TODO: 图像像素太大时，常常无法打开图片进行裁剪
 				Intent intent = new Intent ("com.android.camera.action.CROP");
 				intent.setDataAndType(imageUri, "image/*");
-				intent.putExtra("scale", true);
-				//intent.putExtra("aspectX", 4);
-				//intent.putExtra("aspectY", 3);
-				//intent.putExtra("outputX", 640);
-				//intent.putExtra("outputY", 480);
+				intent.putExtra("crop", "true");
+				intent.putExtra("scale", true);				
+				intent.putExtra("aspectX", 4);
+				intent.putExtra("aspectY", 3);
+				intent.putExtra("outputX", 640);
+				intent.putExtra("outputY", 480);
 				intent.putExtra("return-data", false);
 				intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
 				intent.putExtra("noFaceDetection", true);
@@ -173,12 +173,13 @@ public class MainActivity extends Activity implements OnClickListener{
 			break;
 		case CROP_PHOTO:
 			if (resultCode == RESULT_OK) {
-				if (data == null) {
+				/*if (data == null) {
 					Toast.makeText(this, "intent data is null", Toast.LENGTH_SHORT).show();
 				} else {
 					Toast.makeText(this, "intent data is not null", Toast.LENGTH_SHORT).show();
-				}
+				}*/
 				try {
+					//Bitmap bitmap = decodeUriAsBitmap(imageUri);
 					Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));					
 					picture.setImageBitmap(bitmap);
 				} catch (FileNotFoundException e) {

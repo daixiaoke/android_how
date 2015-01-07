@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">最炫民族风</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="play">开始</string>
+    <string name="pause">暂停</string>
+    <string name="stop">结束</string>
+
+</resources>
