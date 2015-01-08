@@ -38,7 +38,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
 	public void initMediaPlayer() {
 		try {
-			File file = new File(Environment.getExternalStorageDirectory(), "/kgmusic/download/凤凰传奇 - 最炫民族风.mp3");
+			File file = new File(Environment.getExternalStorageDirectory(), "/歌曲/张学友 - 潮水的诺言.mp3");
 			mediaPlayer.setDataSource(file.getPath());
 			mediaPlayer.prepare();
 		} catch (Exception e) {

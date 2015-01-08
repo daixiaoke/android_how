@@ -5,8 +5,8 @@
 
     <VideoView
         android:id="@+id/video_view"
-        android:layout_width="1024dp"
-        android:layout_height="500dp" />
+        android:layout_width="360dp"
+        android:layout_height="400dp" />
 
     <LinearLayout
     	android:layout_width="match_parent"

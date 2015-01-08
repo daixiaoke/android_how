@@ -42,7 +42,12 @@ private VideoView videoView;
 
 	public void initVideoPath() {
 		try {
-			File file = new File(Environment.getExternalStorageDirectory(), "/DCIM/Camera/VID_20140727_092001.mp4");
+			File file;
+			if (false) {
+				file = new File(Environment.getExternalStorageDirectory(), "/DCIM/Camera/VID_20140727_092001.mp4");
+			} else {
+				file = new File(Environment.getExternalStorageDirectory(), "/DCIM/Camera/VID_20131214_180203.m4v");
+			}
 			videoView.setVideoPath(file.getPath());
 		} catch (Exception e) {
 			e.printStackTrace();
